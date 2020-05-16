@@ -59,6 +59,7 @@ app.get('/read', urlencodedParser, function (req, res) {
             });
         });
     }
+    res.end()
 
 });
 app.post('/update', (req, res) => {

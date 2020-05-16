@@ -35,11 +35,11 @@ app.post('/add', urlencodedParser, function (req, res) {
             dbo.collection("user").insertOne(response, function (err, res) {
                 if (err) console.log(err.message);
                 console.log("1 document inserted");
+                res.send('document inserted succesfully')
                 db.close();
             });
         });
     }
-    res.send('document inserted succesfully')
 });
 app.get('/read', urlencodedParser, function (req, res) {
     // res.header('Access-Control-Allow-Origin', "*");
@@ -76,10 +76,10 @@ app.post('/update', (req, res) => {
             dbo.collection("user").updateOne(oldObj, newobj, function (err, res) {
                 if (err) throw err;
                 console.log("1 document updated");
+                res.send("updated succesfully")
                 db.close();
             });
         });
-        res.send("updated succesfully")
         res.end()
     }
 })
@@ -93,10 +93,10 @@ app.post('/delete',(req, res) => {
                 var obj = { email: req.body.email }
                 dbo.collection("user").deleteOne(obj, function (err, obj) {
                     if (err) throw err;
+                    res.send('delete user suucessfully')
                     db.close();
                 });
             });
-            res.send('delete user suucessfully')
             res.end()
         }
     }

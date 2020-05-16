@@ -5,7 +5,9 @@ var bodyParser = require('body-parser');
 // var MongoClient = require('mongodb').MongoClient;
 var MongoClient = require('mongoose');
 // var url = "mongodb://localhost:27017/mydb"
-var url = "mongodb://localhost/mydb"
+// var url = "mongodb://localhost/mydb"
+var url = "mongodb://ucjbgiiwo4iruvbvwt47:YbuirFN3rHhCfR5OrCJ2@bbei8cecgjhgsb3-mongodb.services.clever-cloud.com:27017/bbei8cecgjhgsb3"
+
 var os = require('os')
 var NodePort = 8000
 var fs = require('fs');

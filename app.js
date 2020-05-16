@@ -9,7 +9,7 @@ var MongoClient = require('mongoose');
 var url = "mongodb://ucjbgiiwo4iruvbvwt47:YbuirFN3rHhCfR5OrCJ2@bbei8cecgjhgsb3-mongodb.services.clever-cloud.com:27017/bbei8cecgjhgsb3"
 
 var os = require('os')
-var NodePort = 8000
+var NodePort = 8080
 var fs = require('fs');
 
 let allowCrossDomain = function (req, res, next) {

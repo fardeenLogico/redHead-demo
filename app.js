@@ -4,8 +4,8 @@ var mongodb = require('mongodb')
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 // var MongoClient = require('mongoose');
-// var url = "mongodb://localhost:27017/mydb"
-// var url = "mongodb://localhost/mydb"
+// var url = "mongodb://localhost:27017/bbei8cecgjhgsb3"
+// var url = "mongodb://localhost/bbei8cecgjhgsb3"
 var url = "mongodb://ucjbgiiwo4iruvbvwt47:YbuirFN3rHhCfR5OrCJ2@bbei8cecgjhgsb3-mongodb.services.clever-cloud.com:27017/bbei8cecgjhgsb3"
 
 var os = require('os')
@@ -31,7 +31,7 @@ app.post('/add', urlencodedParser, function (req, res) {
         console.log(response)
         MongoClient.connect(url, function (err, db) {
             if (err) console.log(err.message);
-            var dbo = db.db("mydb")
+            var dbo = db.db("bbei8cecgjhgsb3")
             dbo.collection("user").insertOne(response, function (err, ress) {
                 if (err) console.log(err.message);
                 console.log("1 document inserted");
@@ -49,7 +49,7 @@ app.get('/read', urlencodedParser, function (req, res) {
         console.log(response)
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
-            var dbo = db.db("mydb");
+            var dbo = db.db("bbei8cecgjhgsb3");
             dbo.collection("user").find({}).toArray(function (err, result) {
                 if (err) throw err;
                 // console.log(result);
@@ -72,7 +72,7 @@ app.post('/update', (req, res) => {
         var newobj = { $set: obj }
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
-            var dbo = db.db("mydb");
+            var dbo = db.db("bbei8cecgjhgsb3");
             dbo.collection("user").updateOne(oldObj, newobj, function (err, ress) {
                 if (err) throw err;
                 console.log("1 document updated");
@@ -89,7 +89,7 @@ app.post('/delete',(req, res) => {
             // arr.splice(req.query.index, 1)
             MongoClient.connect(url, function (err, db) {
                 if (err) throw err;
-                var dbo = db.db("mydb");
+                var dbo = db.db("bbei8cecgjhgsb3");
                 var obj = { email: req.body.email }
                 dbo.collection("user").deleteOne(obj, function (err, obj) {
                     if (err) throw err;

@@ -21,7 +21,7 @@ app.use(express.json({
     type: ['application/json', 'text/plain']
 }))
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
-app.use(allowCrossDomain)
+// app.use(allowCrossDomain)
 
 app.post('/add', urlencodedParser, function (req, res) {
     // res.header('Access-Control-Allow-Origin', "*");
@@ -35,31 +35,28 @@ app.post('/add', urlencodedParser, function (req, res) {
             dbo.collection("user").insertOne(response, function (err, ress) {
                 if (err) console.log(err.message);
                 console.log("1 document inserted");
-                res.send('document inserted succesfully')
+                res.send({ message: 'document inserted succesfully' })
                 db.close();
             });
         });
     }
 });
-app.get('/read', urlencodedParser, function (req, res) {
+
+app.get('/read', function (req, res) {
     // res.header('Access-Control-Allow-Origin', "*");
-    var response = req.body
-    if (response) {
-        // BranchArr.push(response)
-        console.log(response)
-        MongoClient.connect(url, function (err, db) {
-            if (err) throw err;
-            var dbo = db.db("bbei8cecgjhgsb3");
-            dbo.collection("user").find({}).toArray(function (err, result) {
-                if (err) throw err;
-                // console.log(result);
-                let userArr = result
-                db.close();
-                res.send(userArr)
-            });
+    MongoClient.connect(url, function (err, db) {
+        if (err) console.log(err, 'db');
+        var dbo = db.db("bbei8cecgjhgsb3");
+        dbo.collection("user").find({}).toArray(function (err, result) {
+            if (err) console.log(err, 'gffd');
+            // console.log(result);
+            let userArr = result
+            res.send(userArr)
+            db.close();
+            res.end()
         });
-    }
-    res.end()
+    });
+    // }
 
 });
 app.post('/update', (req, res) => {
@@ -71,10 +68,10 @@ app.post('/update', (req, res) => {
         var oldObj = req.body.oldObj
         var newobj = { $set: obj }
         MongoClient.connect(url, function (err, db) {
-            if (err) throw err;
+            if (err) console.log(err);
             var dbo = db.db("bbei8cecgjhgsb3");
             dbo.collection("user").updateOne(oldObj, newobj, function (err, ress) {
-                if (err) throw err;
+                if (err) console.log(err);
                 console.log("1 document updated");
                 res.send("updated succesfully")
                 db.close();
@@ -83,16 +80,16 @@ app.post('/update', (req, res) => {
         res.end()
     }
 })
-app.post('/delete',(req, res) => {
+app.post('/delete', (req, res) => {
     if (res) {
         if (req.body.email) {
             // arr.splice(req.query.index, 1)
             MongoClient.connect(url, function (err, db) {
-                if (err) throw err;
+                if (err) console.log(err);
                 var dbo = db.db("bbei8cecgjhgsb3");
                 var obj = { email: req.body.email }
                 dbo.collection("user").deleteOne(obj, function (err, obj) {
-                    if (err) throw err;
+                    if (err) console.log(err);
                     res.send('delete user suucessfully')
                     db.close();
                 });

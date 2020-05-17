@@ -32,7 +32,7 @@ app.post('/add', urlencodedParser, function (req, res) {
         MongoClient.connect(url, function (err, db) {
             if (err) console.log(err.message);
             var dbo = db.db("mydb")
-            dbo.collection("user").insertOne(response, function (err, res) {
+            dbo.collection("user").insertOne(response, function (err, ress) {
                 if (err) console.log(err.message);
                 console.log("1 document inserted");
                 res.send('document inserted succesfully')
@@ -73,7 +73,7 @@ app.post('/update', (req, res) => {
         MongoClient.connect(url, function (err, db) {
             if (err) throw err;
             var dbo = db.db("mydb");
-            dbo.collection("user").updateOne(oldObj, newobj, function (err, res) {
+            dbo.collection("user").updateOne(oldObj, newobj, function (err, ress) {
                 if (err) throw err;
                 console.log("1 document updated");
                 res.send("updated succesfully")
